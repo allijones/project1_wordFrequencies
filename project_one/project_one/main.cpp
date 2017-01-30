@@ -22,7 +22,7 @@ using namespace std;
 int main() {
 	ifstream inFile;
 	string fileName;
-	StuString stuStr;
+	StuString stuStr, str2;
 	Word word;
 	char ch;
 	char lowCh;
@@ -30,7 +30,7 @@ int main() {
 
 	//Test for file open
 	do {
-		cout << "Enter Name of Data File: ";
+		cout << "Enter Name of File: ";
 		cin >> fileName;
 
 		inFile.clear(); 
@@ -44,12 +44,6 @@ int main() {
 
 	//dynamically allocate array of Words? What size? 
 	//Word *word = new Word[]; 
-	
-	/*inFile.get(ch);
-	stuStr.addChar(ch);
-
-	inFile.get(lowCh);
-	stuStr.addChar(lowCh);*/
 
 	while (inFile.get(ch)) {
 		if (!ispunct(ch) && !isspace(ch)) {
@@ -68,15 +62,16 @@ int main() {
 
 		//only set the word if there has been only 1 space or 1 punctuation
 		if ((amtPunct == 1 && amtSpace == 0) || (amtPunct == 0 && amtSpace == 1)) {
-			cout << "In here." << endl;
 			word.setWord(stuStr);
-			//test
-			//cout << word.getWord();
 			stuStr.clear();
+         str2 = word.getData();
+         cout << endl;
+         cout << "Word: " << str2.toString() << endl << endl;
 		}
 	}
 
-	cout << "Out." << endl;
+   cout << endl;
+	cout << "DONE." << endl;
 	//Housekeeping
 	inFile.close();
 	//delete?
