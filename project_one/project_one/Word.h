@@ -48,6 +48,14 @@ public:
 	void setWord(const StuString &);
 
 	/**
+	* TESTING
+	*
+	* assignes the value of the parameter to the value of the data of the object
+	*    that called the function
+	*/
+	StuString getWord();
+
+	/**
 	* setFrequency
 	*
 	* assigns the frequency to the value of the parameter

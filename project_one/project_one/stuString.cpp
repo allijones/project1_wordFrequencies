@@ -1,5 +1,5 @@
 /**
-* file: Word.h
+* file: stuString.cpp
 * author: Grant Gasser
 * course: CSI 1440
 * assignment:  project 1
@@ -12,10 +12,12 @@
 */
 
 #include "stuString.h"
+#include <iostream>
 
 int StuString::compare(const StuString &str){
-	int val;
+	int val = 0;
 
+	
 	
 	return val;
 }
@@ -30,10 +32,37 @@ int StuString::length(){
 	return count;
 }
 
+//clears StuString for the next string/word
 void StuString::clear(){
 	data[0] = '\0';
 }
 
+//need to dynamically resize in here
 void StuString::addChar(char c){
-	data[this->length + 1] = c;
+	//to clean up code in rest of function
+	int length = this->length();
+	int oldCap = this->capacity;
+	cout << "Length: " << length << endl;
+	cout << "Cap: " << oldCap << endl;
+
+	//double capacity
+	if (length + 1 == oldCap) {
+		cout << "In double cap function" << endl;
+		//temporary pointer so as not to lose address of init array when copying
+		char *temp = data;
+
+		this->capacity *= 2;
+		data = new char[this->capacity];
+
+		//copy values of old array into new array
+		for (int i = 0; i < oldCap; i++) {
+			data[i] = temp[i];
+		}
+
+		delete[] temp;
+	}
+
+	//add the character and null after it
+	data[length] = c;
+	data[length + 1] = '\0';
 }

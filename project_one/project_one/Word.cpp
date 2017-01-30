@@ -15,14 +15,23 @@
 #include "stuString.h"
 
 Word::Word() {
+	frequency = 0;
 }
 
-bool Word::incrFrequency(const StuString &) {
+bool Word::incrFrequency(const StuString &stuStr) {
+	bool increment = false;
 
+	
+	return increment;
 }
 
-void Word::setWord(const StuString &) {
+void Word::setWord(const StuString &stuStr) {
+	str = stuStr;
+}
 
+//for testing
+StuString Word::getWord() {
+	return str;
 }
 
 void Word::setFrequency(int) {
@@ -33,12 +42,7 @@ int Word::getFrequency() {
 	return frequency;
 }
 
-//what? - VS added this
-/*StuString & Word::getData()
+StuString & Word::getData()
 {
-	// TODO: insert return statement here
-}
-
-Word::StuString &getData() {
-
+	return str;
 }

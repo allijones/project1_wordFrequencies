@@ -1,4 +1,4 @@
-
+#pragma once
 /**
 * file: stuString.h
 * author: Grant Gasser
