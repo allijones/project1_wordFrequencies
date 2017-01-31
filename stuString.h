@@ -1,4 +1,3 @@
-#pragma once
 /**
 * file: stuString.h
 * author: Grant Gasser
@@ -11,39 +10,43 @@
 *
 * Dont know yet...
 */
+#ifndef STUSTRING_H
+#define STUSTRING_H
 
 #include "ProfString.h"
 
 class StuString : public ProfString {
 public:
-	/**
-	* compare
-	*
-	* returns < 0 if object is (alphabetically) less than the parameter 
-	* returns 0 if the two objects are same
-	* returns > 0 if object is greater than the parameter
-	*/
-	int compare(StuString &);
+   /**
+   * compare
+   *
+   * returns < 0 if object is (alphabetically) less than the parameter
+   * returns 0 if the two objects are same
+   * returns > 0 if object is greater than the parameter
+   */
+   int compare(StuString &);
 
-	/**
-	* length
-	*
-	* returns the number of characters currently stored in the object
-	*/
-	int length();
+   /**
+   * length
+   *
+   * returns the number of characters currently stored in the object
+   */
+   int length();
 
-	/**
-	* clear
-	*
-	* removes all characters currently stored in the object 
-	* (doesn't require re-allocation of memory)
-	*/
-	void clear();
+   /**
+   * clear
+   *
+   * removes all characters currently stored in the object
+   * (doesn't require re-allocation of memory)
+   */
+   void clear();
 
-	/**
-	* addChar
-	*
-	* appends the parameter to the end of the StuString object
-	*/
-	void addChar(char);
+   /**
+   * addChar
+   *
+   * appends the parameter to the end of the StuString object
+   */
+   void addChar(char);
 };
+
+#endif //STUSTRING_H
