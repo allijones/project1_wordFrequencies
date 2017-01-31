@@ -15,14 +15,11 @@
 #include "stuString.h"
 
 Word::Word() {
-	frequency = 0;
+	frequency = 1;
 }
 
-bool Word::incrFrequency(const StuString &stuStr) {
-	bool increment = false;
-
-	
-	return increment;
+void Word::incrFrequency(StuString &stuStr) {
+	frequency++;
 }
 
 void Word::setWord(const StuString &stuStr) {
@@ -34,8 +31,8 @@ StuString Word::getWord() {
 	return str;
 }
 
-void Word::setFrequency(int) {
-
+void Word::setFrequency(int f) {
+	frequency = f;
 }
 
 int Word::getFrequency() {
@@ -49,5 +46,5 @@ StuString & Word::getData()
 
 //bubble sort
 void Word::sortWords() {
-
+	
 }
