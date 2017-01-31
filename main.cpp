@@ -8,55 +8,42 @@
 * date modified: 1/27/2017
 *       - file created
 *
-* Dont know yet...
+* The driver for the Word, ProfString, and Student classes.
+* The program reads a set of characters from stdin and returns the 
+* words in alphabetical order and their frequency, ignoring whitespace 
+* and punctuation
 */
 
 #include "Word.h"
 #include "stuString.h"
 #include <iostream>
 #include <ctype.h>
-#include <fstream>
 #include <iomanip>
+#include <fstream>
 
 using namespace std;
 
 int main() {
-   ifstream inFile;
-   string fileName;
    StuString stuStr, str2;
    Word word, tempWord;
    char ch;
    char lowCh;
-   int amtPunct, amtSpace, amtDigit;
-   int wordCap = 2, wordCount = 0;
-
-   //Test for file open
-   do {
-      cout << "Enter Name of File: ";
-      cin >> fileName;
-
-      inFile.clear();
-      inFile.open(fileName.c_str());
-
-      if (!inFile) {
-         cout << "Error: File Not Open." << endl;
-      }
-
-   } while (!inFile);
+   int amtPunct, amtSpace;
+   int wordCap = 2, wordCount = 0, amtWords = 0;
+   bool empty = false;
 
    //dynamically allocate array of Words 
    Word *wordArr = new Word[wordCap];
 
-   while (inFile.get(ch)) {
-      if (!ispunct(ch) && !isspace(ch) && !isdigit(ch)) {
+   //read in character by character
+   while (cin.get(ch)) {
+      if (!ispunct(ch) && !isspace(ch)) {
          amtPunct = 0;
          amtSpace = 0;
-         amtDigit = 0;
          //make lowercase
          lowCh = tolower(ch);
          //add to StuString
          stuStr.addChar(lowCh);
-         //cout << "stuStr: " << stuStr.toString() << endl;
       }
       else if (ispunct(ch)) {
          amtPunct++;
@@ -64,26 +51,17 @@ int main() {
       else if (isspace(ch)) {
          amtSpace++;
       }
-      else if (isdigit(ch)) {
-         amtDigit++;
-      }
 
       //only set the word if there has been only 1 space or 1 punctuation or 1 digit
-      if ((amtPunct == 1 && amtSpace == 0 && amtDigit == 0) ||
-         (amtPunct == 0 && amtSpace == 1 && amtDigit == 0) ||
-         (amtPunct == 0 && amtSpace == 0 && amtDigit == 1)) {
+      if (amtSpace == 1) {
          wordArr[wordCount].setWord(stuStr);
          wordCount++;
          stuStr.clear();
          str2 = wordArr[wordCount - 1].getData();
-         //cout << endl;
-         /*cout << "Word: " << str2.toString() << endl << endl;
-         cout << "wordArr[wordCount-1].getData(): " << wordArr[wordCount-1].getData().toString() << endl;
-         cout << "Should get zeros:  " << str2.compare(wordArr[wordCount-1].getData()) << endl;*/
       }
 
+      //dbl size of Word array here, using a temporary pointer to retain address
       if (wordCount == wordCap) {
-         //temp pointer to Word array so as to not lot as address when need to copy
          Word *temp = wordArr;
 
          //double word capacity
@@ -96,12 +74,12 @@ int main() {
             wordArr[i] = temp[i];
          }
 
+         //return memory to HEAP
          delete[] temp;
       }
    }
 
-   //FIND FREQUENCIES HERE
-   //passes
+   //Find the frequencies here if we have matching words, use compare to tell
    for (int i = 0; i < wordCount; i++) {
       for (int j = i + 1; j < wordCount; j++) {
          if (wordArr[i].getData().compare(wordArr[j].getData()) == 0) {
@@ -116,38 +94,36 @@ int main() {
       for (int j = 0; j < wordCount - pass; j++) {
          if (wordArr[j].getData().compare(wordArr[j+1].getData()) > 0) {
             //swap words
-            //store freq. and str of object in tempWord
+            //store freq. and StuString of jth object in tempWord
             tempWord.setFrequency(wordArr[j].getFrequency());
             tempWord.setWord(wordArr[j].getData());
 
-            //replace pass object data with j object data
+            //replace jth object data with jth+1 object data
             wordArr[j].setFrequency(wordArr[j + 1].getFrequency());
             wordArr[j].setWord(wordArr[j + 1].getData());
 
-            //replace j object data with tempWord object data (pass obj data)
+            //replace jth+1 object data with tempWord object data (jth obj data)
             wordArr[j + 1].setFrequency(tempWord.getFrequency());
             wordArr[j + 1].setWord(tempWord.getData());
          }
       }
    }
 
-   //PRINT WORDS TEST -- IT WORKS
+   //print words, making sure not to print same word twice
    for (int i = 0; i < wordCount; i++) {
-      //making sure to not print same word twice
+      //print first word because it can't be a duplicate
       if (i == 0) {
-         //print first word, can't be a duplicate
          cout << setw(15) << left << wordArr[i].getData().toString() << right << wordArr[i].getFrequency() << endl;
+         amtWords = wordArr[i].getFrequency();
       } else if(wordArr[i].getData().compare(wordArr[i - 1].getData()) != 0) {
-         //only printing if word has not been printed
+         //only printing if word has not been printed already
          cout << setw(15) << left << wordArr[i].getData().toString() << right << wordArr[i].getFrequency() << endl;
+         amtWords = wordArr[i].getFrequency();
       }
    }
 
-   //Housekeeping
-   inFile.close();
-
-   //HEAP ERROR when I call this. Why??
-   //delete[] wordArr; 
+   cout << endl;
+   cout << "array size: " << wordCap << endl;
 
    return 0;
 }
