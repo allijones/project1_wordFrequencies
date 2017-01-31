@@ -26,11 +26,6 @@ void Word::setWord(const StuString &stuStr) {
 	str = stuStr;
 }
 
-//for testing
-StuString Word::getWord() {
-	return str;
-}
-
 void Word::setFrequency(int f) {
 	frequency = f;
 }
@@ -42,9 +37,4 @@ int Word::getFrequency() {
 StuString & Word::getData()
 {
 	return str;
-}
-
-//bubble sort
-void Word::sortWords() {
-	
 }
