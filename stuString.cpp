@@ -1,5 +1,5 @@
 /**
-* file: stuString.cpp
+* file: stuString.h
 * author: Grant Gasser
 * course: CSI 1440
 * assignment:  project 1
@@ -10,72 +10,43 @@
 *
 * Dont know yet...
 */
+#ifndef STUSTRING_H
+#define STUSTRING_H
 
-#include "stuString.h"
-#include <iostream>
+#include "ProfString.h"
 
-//doesn't allow call to str unless I take away the const
-int StuString::compare(StuString &str) {
-	int val = 0;
-	int i = 0;
-	int dif = 0;
-	bool done = false;
+class StuString : public ProfString {
+public:
+   /**
+   * compare
+   *
+   * returns < 0 if object is (alphabetically) less than the parameter
+   * returns 0 if the two objects are same
+   * returns > 0 if object is greater than the parameter
+   */
+   int compare(StuString &);
 
-	while (!done && i < this->length() && i < str.length()) {
-		if (this->data[i] < str.data[i]) {
-			val = this->data[i] - str.data[i];
-			done = true;
-		} else if(this->data[i] > str.data[i]){
-			val = this->data[i] - str.data[i];
-			done = true;
-		}
-		i++;
-	}
+   /**
+   * length
+   *
+   * returns the number of characters currently stored in the object
+   */
+   int length();
 
-	return val;
-}
+   /**
+   * clear
+   *
+   * removes all characters currently stored in the object
+   * (doesn't require re-allocation of memory)
+   */
+   void clear();
 
-int StuString::length() {
-	int count = 0;
+   /**
+   * addChar
+   *
+   * appends the parameter to the end of the StuString object
+   */
+   void addChar(char);
+};
 
-	while (data[count] != '\0') {
-		count++;
-	}
-
-	return count;
-}
-
-//clears StuString for the next string/word
-void StuString::clear() {
-	data[0] = '\0';
-}
-
-//need to dynamically resize in here
-void StuString::addChar(char c) {
-	//to clean up code in rest of function
-	int length = this->length();
-	int oldCap = this->capacity;
-	//cout << "Length: " << length << endl;
-	//cout << "Cap: " << oldCap << endl;
-
-	//double capacity
-	if (length + 1 == oldCap) {
-		//temporary pointer so as not to lose address of init array when copying
-		char *temp = data;
-
-		//double capacity of char array
-		this->capacity *= 2;
-		data = new char[this->capacity];
-
-		//copy values of old array into new array
-		for (int i = 0; i < oldCap; i++) {
-			data[i] = temp[i];
-		}
-
-		delete[] temp;
-	}
-
-	//add the character and null after it
-	data[length] = c;
-	data[length + 1] = '\0';
-}
+#endif //STUSTRING_H
