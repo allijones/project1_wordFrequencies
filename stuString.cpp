@@ -18,9 +18,10 @@
 int StuString::compare(StuString &str) {
 	int val = 0;
 	int i = 0;
+	int dif = 0;
 	bool done = false;
 
-	while (!done) {
+	while (!done && i < this->length() && i < str.length()) {
 		if (this->data[i] < str.data[i]) {
 			val = this->data[i] - str.data[i];
 			done = true;
@@ -28,6 +29,7 @@ int StuString::compare(StuString &str) {
 			val = this->data[i] - str.data[i];
 			done = true;
 		}
+		i++;
 	}
 
 	return val;
@@ -54,7 +56,7 @@ void StuString::addChar(char c) {
 	int length = this->length();
 	int oldCap = this->capacity;
 	//cout << "Length: " << length << endl;
-	cout << "Cap: " << oldCap << endl;
+	//cout << "Cap: " << oldCap << endl;
 
 	//double capacity
 	if (length + 1 == oldCap) {
