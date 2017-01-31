@@ -21,67 +21,52 @@ using namespace std;
 
 class Word {
 private:
-	StuString str;
-	int frequency;
+   StuString str;
+   int frequency;
 public:
-	/**
-	* default constructor
-	*
-	* Sets all member variables to appropriate values
-	*/
-	Word();
+   /**
+   * default constructor
+   *
+   * Sets all member variables to appropriate values
+   */
+   Word();
 
-	/**
-	* incrFrequency
-	*
-	* determines if the frequency should be updated and updates if necessary.
-	*    returns true if frequency is updated and false otherwise
-	*/
-	void incrFrequency(StuString &);
+   /**
+   * incrFrequency
+   *
+   * determines if the frequency should be updated and updates if necessary.
+   *    returns true if frequency is updated and false otherwise
+   */
+   void incrFrequency(StuString &);
 
-	/**
-	* setWord
-	*
-	* assignes the value of the parameter to the value of the data of the object
-	*    that called the function
-	*/
-	void setWord(const StuString &);
+   /**
+   * setWord
+   *
+   * assignes the value of the parameter to the value of the data of the object
+   *    that called the function
+   */
+   void setWord(const StuString &);
 
-	/**
-	* TESTING
-	*
-	* assignes the value of the parameter to the value of the data of the object
-	*    that called the function
-	*/
-	StuString getWord();
+   /**
+   * setFrequency
+   *
+   * assigns the frequency to the value of the parameter
+   */
+   void setFrequency(int);
 
-	/**
-	* setFrequency
-	*
-	* assigns the frequency to the value of the parameter
-	*/
-	void setFrequency(int);
+   /**
+   * getFrequency
+   *
+   * returns a copy of the frequency
+   */
+   int getFrequency();
 
-	/**
-	* getFrequency
-	*
-	* returns a copy of the frequency
-	*/
-	int getFrequency();
-
-	/**
-	* getData
-	*
-	* returns a reference to data
-	*/
-	StuString &getData();
-
-	/**
-	* getData
-	*
-	* returns a reference to data
-	*/
-	void sortWords();
+   /**
+   * getData
+   *
+   * returns a reference to data
+   */
+   StuString &getData();
 };
 
 #endif //WORD_H
