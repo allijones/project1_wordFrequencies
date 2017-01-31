@@ -37,7 +37,7 @@ public:
 	* determines if the frequency should be updated and updates if necessary.
 	*    returns true if frequency is updated and false otherwise
 	*/
-	bool incrFrequency(const StuString &);
+	void incrFrequency(StuString &);
 
 	/**
 	* setWord
